@@ -1,6 +1,7 @@
 package com.example.emae.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,28 +11,25 @@ import java.util.List;
 @Entity
 @Table(name = "branch")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 public class Branch {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "branch")
     private String branch;
+
+    @Column(name = "subBranch")
+    private String subBranch;
 
     @Column(name = "concept")
     private String concept;
 
-    @Column(name = "sub_concept")
-    private String subConcept;
+    @Column(name = "units")
+    private String units;
 
-    @ManyToOne
-    @JoinColumn(name = "sub_branch")
-    private Branch subBranch;
-
-    @OneToMany(mappedBy = "subBranch")
-    private List<Branch> subBranches;
-
-
-    @Column(name = "informationSource")
-    private String informationSource;
+    @OneToMany(mappedBy = "branch")
+    private List<Variable> variables;
 }

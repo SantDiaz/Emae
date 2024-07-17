@@ -15,22 +15,16 @@ import java.util.Date;
 public class Variable {
 
     @Id
-    @Column(name = "sub_branch")
-    private String subBranch;
-
-    @Column(name = "variable")
-    private String variable;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column(name = "value")
     private Float value;
-
-    @Column(name = "units")
-    private String units;
 
     @Column(name = "date")
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "sub_branch", insertable = false, updatable = false)
+    @JoinColumn(name = "branch_id")
     private Branch branch;
 }
